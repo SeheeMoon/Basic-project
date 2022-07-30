@@ -4,6 +4,9 @@
         <title>문세희의 홈페이지</title>
         <meta charset="utf-8">
         <link href="./practice.css" rel="stylesheet" type="text/css">
+        
+        <script type="text/javascript" src="add_two_numbers.js"></script>
+        <script type="text/javascript" src="what_time_is_it.js"></script>
 
         <script type="text/javascript">
             function doSomething(){
@@ -12,6 +15,10 @@
                 document.getElementById("ValueA").innerHTML = a;
                 document.getElementById("ValueB").innerHTML = b;
                 document.getElementById("ValueC").innerHTML = Number(a) + Number(b);
+            }
+
+            function whatTimeIsIt() {
+                alert(new Date());
             }
         </script>
     </head>
@@ -28,6 +35,9 @@
         <h3>세 번째 크기 헤드라인</h3>
         <h4>네 번째 크기 헤드라인</h4>
         <h5>다섯 번째 크기 헤드라인</h5>
+
+        <button onclick="whatTimeIsIt()">현재시간</button>
+        <hr />
 
         <label for="inputA">a</label>
         <input id="inputA" value=1 onkeyup="doSomething()">
