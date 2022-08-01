@@ -41,8 +41,9 @@
                             <!-- Post meta content-->
                             <div class="text-muted fst-italic mb-2">{{ post.created_at }} by <a href="#">작성자명 쓸 위치(개발예정)</a></div>
                         </header>
+                        <hr/>
                         <!-- Preview image figure-->
-                        <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure>
+                        <figure class="mb-4"><img class="img-fluid rounded" src="{{ post.head_image.url }}" alt="" /></figure>
                         <!-- Post content-->
                         <section class="mb-5">
                             <p>{{ post.content }}</p>
