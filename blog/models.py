@@ -9,3 +9,6 @@ class Post(models.Model): # models 모듈의 Model 클래스를 확장해서 만
 
     def __str__(self):
         return f'[{self.pk}]{self.title}' #pk는 각 레코드에 대한 고유값 ex)처음 포스트는 자동으로 pk값 1 부여, 두번째 포스트는 2
+
+    def get_absolute_url(self):
+        return f'/blog/{self.pk}/'
