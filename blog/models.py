@@ -2,6 +2,7 @@ from django.db import models
 import os
 class Post(models.Model): # models 모듈의 Model 클래스를 확장해서 만듦
     title = models.CharField(max_length=30) # CharField 클래스는 문자(char)를 담는 필드
+    hook_text = models.CharField(max_length=100, blank=True)
     content = models.TextField() # TextField는 문자열의 길이 제한이 없음
 
     head_image = models.ImageField(upload_to='blog/images/%Y/%m/%d/', blank=True) #이미지를 지정할 폴더의 경로 규칙 지정, 뒤 옵션은 해당 필드는 필수 항목은 아니라는 뜻
