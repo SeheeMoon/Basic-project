@@ -2,6 +2,16 @@ from django.db import models
 from django.contrib.auth.models import User
 import os
 
+class Tag(models.Model):
+    name = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return f'/blog/tag/{self.slug}/'
+
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True) #unique=True로 설정하면 동일한 name을 갖는 카테고리를 또 만들 수 없음
     slug = models.SlugField(max_length=200, unique=True, allow_unicode=True) #SlugField는 사람이 읽을 수 있는 텍스트로 고유 URL을 만들고 싶을 때 주로 사용함.
@@ -27,6 +37,8 @@ class Post(models.Model): # models 모듈의 Model 클래스를 확장해서 만
     author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
+
+    tags = models.ManyToManyField(Tag, blank=True)
 
     def __str__(self):
         return f'[{self.pk}]{self.title} :: {self.author}' #pk는 각 레코드에 대한 고유값 ex)처음 포스트는 자동으로 pk값 1 부여, 두번째 포스트는 2
