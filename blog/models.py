@@ -1,6 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
 import os
+
+class Category(models.Model):
+    name = models.CharField(max_length=50, unique=True) #unique=True로 설정하면 동일한 name을 갖는 카테고리를 또 만들 수 없음
+    slug = models.SlugField(max_length=200, unique=True, allow_unicode=True) #SlugField는 사람이 읽을 수 있는 텍스트로 고유 URL을 만들고 싶을 때 주로 사용함.
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = 'Categories'
 class Post(models.Model): # models 모듈의 Model 클래스를 확장해서 만듦
     title = models.CharField(max_length=30) # CharField 클래스는 문자(char)를 담는 필드
     hook_text = models.CharField(max_length=100, blank=True)
@@ -10,7 +20,10 @@ class Post(models.Model): # models 모듈의 Model 클래스를 확장해서 만
     file_upload = models.FileField(upload_to='blog/files/%Y/%m/%d/', blank=True)
     created_at = models.DateTimeField(auto_now_add=True) #DateTimeField는 월, 일, 시, 분, 초까지 기록할 수 있게 해주는 필드, auto_now_add=True는 처음 레코드가 생성될 때 현재시각이 자동으로 저장되게 함
     updated_at = models.DateTimeField(auto_now=True) #auto_now=True는 다시 저장할 때 마다 그 시각이 저장되도록 함
+
     author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+
+    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return f'[{self.pk}]{self.title} :: {self.author}' #pk는 각 레코드에 대한 고유값 ex)처음 포스트는 자동으로 pk값 1 부여, 두번째 포스트는 2
